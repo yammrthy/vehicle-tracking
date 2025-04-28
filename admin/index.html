@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Login</title>
+  <style>
+    :root {
+      --primary-color: #204080;
+      --hover-color: #1a3366;
+      --bg-color: #edf1f5;
+      --font-color: #34495e;
+      --input-bg: #f8f9fa;
+      --input-border: #ccd1d1;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .login-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--primary-color);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--font-color);
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1.2rem;
+      border: 1px solid var(--input-border);
+      border-radius: 6px;
+      background-color: var(--input-bg);
+      font-size: 1rem;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 0.8rem;
+      background: var(--primary-color);
+      color: white;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background: var(--hover-color);
+    }
+
+    .error-message {
+      color: red;
+      text-align: center;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Admin Login</h2>
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required />
+      
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required />
+      
+      <input type="submit" value="Login" />
+    </form>
+    <p class="error-message" id="error-message" style="display: none;">Invalid username or password. Please try again.</p>
+  </div>
+
+  <script>
+    // Predefined username and password (for simplicity, you can also change this to be fetched from a secure backend)
+    const adminUsername = 'admin';
+    const adminPassword = 'password123';
+
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (username === adminUsername && password === adminPassword) {
+        // If login is successful, redirect to the dashboard
+        localStorage.setItem('adminLoggedIn', 'true');
+        window.location.href = 'dashboard.html';  // Redirect to dashboard page
+      } else {
+        // Show error message if login fails
+        document.getElementById('error-message').style.display = 'block';
+      }
+    });
+  </script>
+
+</body>
+</html>
